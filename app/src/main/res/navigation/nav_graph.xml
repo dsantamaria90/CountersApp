@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/welcome_fragment">
+
+    <fragment
+        android:id="@+id/welcome_fragment"
+        android:name="com.cornershop.counterstest.presentation.welcome.WelcomeFragment"
+        tools:layout="@layout/fragment_welcome"/>
+
+    <fragment
+        android:id="@+id/counters_list_fragment"
+        android:name="com.cornershop.counterstest.presentation.counterslist.CountersListFragment"
+        tools:layout="@layout/fragment_counters_list"/>
+
+</navigation>
