@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cornershop.counterstest.R
 import com.cornershop.counterstest.databinding.FragmentWelcomeBinding
-import com.cornershop.counterstest.presentation.BaseFragment
+import com.cornershop.counterstest.presentation.base.BaseFragment
 
 class WelcomeFragment : BaseFragment<WelcomeViewModel>() {
 

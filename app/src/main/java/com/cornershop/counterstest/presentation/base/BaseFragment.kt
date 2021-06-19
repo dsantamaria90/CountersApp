@@ -1,4 +1,4 @@
-package com.cornershop.counterstest.presentation
+package com.cornershop.counterstest.presentation.base
 
 import android.os.Bundle
 import android.view.View
