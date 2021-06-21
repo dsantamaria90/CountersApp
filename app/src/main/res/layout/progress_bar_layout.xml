@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/progress_bar_container_width"
+    android:layout_height="wrap_content">
+
+    <ProgressBar
+        android:layout_width="@dimen/progress_bar_length"
+        android:layout_height="@dimen/progress_bar_length"
+        android:indeterminate="true"
+        android:layout_gravity="center_horizontal|center_vertical|center"
+        android:indeterminateTint="@color/orange"/>
+
+</FrameLayout>

@@ -30,7 +30,7 @@ abstract class BaseFragment<T : ViewModel> : Fragment() {
         observe(viewLifecycleOwner, EventObserver(cb))
     }
 
-    protected fun <T> LiveData<T>.observe(cb: (T?) -> Unit) {
+    protected fun <T> LiveData<T>.observe(cb: (T) -> Unit) {
         observe(viewLifecycleOwner, cb)
     }
 

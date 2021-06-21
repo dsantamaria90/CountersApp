@@ -2,7 +2,7 @@ package com.cornershop.counterstest.data.datasource
 
 import com.cornershop.counterstest.data.datasource.base.BaseRemoteDataSource
 import com.cornershop.counterstest.data.entity.AddCounter
-import com.cornershop.counterstest.data.entity.DeleteCounter
+import com.cornershop.counterstest.data.entity.ModifyCounter
 import com.cornershop.counterstest.data.service.CountersService
 import com.cornershop.counterstest.domain.entity.Counter
 import com.cornershop.counterstest.domain.entity.Result
@@ -18,12 +18,12 @@ class CountersRemoteDataSource @Inject constructor(
     suspend fun addCounter(addCounter: AddCounter) =
         getResult { service.addCounter(addCounter) }
 
-    suspend fun deleteCounter(deleteCounter: DeleteCounter) =
-        getResult { service.deleteCounter(deleteCounter) }
+    suspend fun deleteCounter(modifyCounter: ModifyCounter) =
+        getResult { service.deleteCounter(modifyCounter) }
 
-    suspend fun incrementCounter(id: String): Result<List<Counter>> =
-        getResult { service.incrementCounter(id) }
+    suspend fun incrementCounter(modifyCounter: ModifyCounter): Result<List<Counter>> =
+        getResult { service.incrementCounter(modifyCounter) }
 
-    suspend fun decrementCounter(id: String): Result<List<Counter>> =
-        getResult { service.decrementCounter(id) }
+    suspend fun decrementCounter(modifyCounter: ModifyCounter): Result<List<Counter>> =
+        getResult { service.decrementCounter(modifyCounter) }
 }

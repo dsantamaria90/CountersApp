@@ -1,5 +1,5 @@
 package com.cornershop.counterstest.data.entity
 
-data class DeleteCounter(
+data class ModifyCounter(
     val id: String
 )

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.cornershop.counterstest.R
 import com.cornershop.counterstest.databinding.FragmentCountersBinding
 import com.cornershop.counterstest.presentation.base.BaseFragment
+import com.cornershop.counterstest.presentation.extension.showAlertDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +30,22 @@ class CountersFragment : BaseFragment<CountersViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.goToAddCounter.observeEvent {
             findNavController().navigate(R.id.add_counter_fragment)
+        }
+        viewModel.modifyCounterError.observeEvent {
+            showAlertDialog(
+                title = getString(
+                    R.string.error_updating_counter_title,
+                    it.counter.title,
+                    it.modifiedCount
+                ),
+                message = getString(R.string.connection_error_description),
+                positiveButtonText = R.string.dismiss,
+                negativeButtonText = R.string.retry
+            ) { isPositive ->
+                if (!isPositive) {
+                    viewModel.onRetryModifyCounterClicked(it)
+                }
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ package com.cornershop.counterstest.data.repository
 import com.cornershop.counterstest.data.datasource.CountersLocalDataSource
 import com.cornershop.counterstest.data.datasource.CountersRemoteDataSource
 import com.cornershop.counterstest.data.entity.AddCounter
-import com.cornershop.counterstest.data.entity.DeleteCounter
+import com.cornershop.counterstest.data.entity.ModifyCounter
 import com.cornershop.counterstest.domain.entity.Counter
 import com.cornershop.counterstest.domain.entity.Result
 import com.cornershop.counterstest.domain.repository.CountersRepository
@@ -35,11 +35,13 @@ class CountersRepositoryImpl @Inject constructor(
         remote.addCounter(AddCounter(title)).saveList()
 
     override suspend fun deleteCounter(id: String): Result<Unit> =
-        remote.deleteCounter(DeleteCounter(id)).saveList()
+        remote.deleteCounter(newModifyCounter(id)).saveList()
+
+    private fun newModifyCounter(id: String) = ModifyCounter(id)
 
     override suspend fun incrementCounter(id: String): Result<Unit> =
-        remote.incrementCounter(id).saveList()
+        remote.incrementCounter(newModifyCounter(id)).saveList()
 
     override suspend fun decrementCounter(id: String): Result<Unit> =
-        remote.decrementCounter(id).saveList()
+        remote.decrementCounter(newModifyCounter(id)).saveList()
 }

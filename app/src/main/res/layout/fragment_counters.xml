@@ -26,22 +26,12 @@
             android:queryHint="@string/search_counters"
             android:iconifiedByDefault="false"/>
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/orange"
-            visibility="@{vm.isLoading}"/>
-
         <include
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/search_view"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/margin_normal_1"
             layout="@layout/counters_list_layout"
             bind:vm="@{vm}"
             visibility="@{vm.showCountersList}"
@@ -62,8 +52,20 @@
             app:layout_constraintTop_toBottomOf="@id/search_view"
             app:layout_constraintBottom_toBottomOf="parent"
             layout="@layout/counters_error_layout"
+            bind:listener="@{vm.onRetryLoadCountersClicked()}"
             visibility="@{vm.showError}"
             tools:visibility="gone"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/orange"
+            visibility="@{vm.isLoading}"/>
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"

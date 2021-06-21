@@ -6,16 +6,21 @@
     <data>
         <variable
             name="counter"
-            type="com.cornershop.counterstest.domain.entity.Counter" />
+            type="com.cornershop.counterstest.domain.entity.Counter"/>
         <variable
             name="listener"
-            type="com.cornershop.counterstest.presentation.counters.CounterItemClickListener" />
+            type="com.cornershop.counterstest.presentation.counters.CounterItemClickListener"/>
+        <variable
+            name="isLoading"
+            type="Boolean"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_normal_1">
+        android:paddingStart="@dimen/margin_normal_2"
+        android:paddingEnd="@dimen/margin_normal_1"
+        android:paddingVertical="@dimen/margin_normal_1">
 
         <TextView
             android:id="@+id/title_tv"
@@ -38,10 +43,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:padding="@dimen/margin_normal_1"
             android:onClick="@{() -> listener.onIncrementClicked(counter)}"
             android:src="@drawable/ic_plus"
-            android:tint="@color/orange"
-            android:background="@android:color/transparent"/>
+            android:tint="@color/modify_counter_state_color"
+            android:background="@android:color/transparent"
+            android:importantForAccessibility="no"
+            android:enabled="@{!isLoading}"/>
 
         <TextView
             android:id="@+id/counter_tv"
@@ -50,8 +58,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@id/increment_ib"
-            android:layout_marginEnd="@dimen/margin_normal_1"
-            android:text="@{counter.count}"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="@{String.valueOf(counter.count)}"
             android:textColor="@color/black"
             android:textSize="@dimen/text_big"
             tools:text="5"/>
@@ -63,11 +71,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@id/counter_tv"
-            android:layout_marginEnd="@dimen/margin_normal_1"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:padding="@dimen/margin_normal_1"
             android:onClick="@{() -> listener.onDecrementClicked(counter)}"
             android:src="@drawable/ic_minus"
-            android:tint="@color/orange"
-            android:background="@android:color/transparent"/>
+            android:tint="@color/modify_counter_state_color"
+            android:background="@android:color/transparent"
+            android:importantForAccessibility="no"
+            loading="@{isLoading}"
+            decrementable="@{counter.decrementable}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,11 +10,14 @@ class CountersAdapter(
     private val listener: CounterItemClickListener
 ) : RecyclerView.Adapter<CountersAdapter.ViewHolder>() {
 
-    var countersList = emptyList<Counter>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    private var countersList = emptyList<Counter>()
+    private var isLoading = false
+
+    fun set(countersList: List<Counter>, isLoading: Boolean) {
+        this.countersList = countersList
+        this.isLoading = isLoading
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = countersList.size
 
@@ -39,6 +42,7 @@ class CountersAdapter(
             binding.apply {
                 this.counter = counter
                 this.listener = this@CountersAdapter.listener
+                this.isLoading = this@CountersAdapter.isLoading
             }
         }
     }
