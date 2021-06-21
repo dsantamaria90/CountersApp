@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface CountersService {
 
-    @GET(COUNTER)
+    @GET("counters")
     suspend fun getCountersList(): List<Counter>
 
     @POST(COUNTER)

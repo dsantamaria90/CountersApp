@@ -11,8 +11,8 @@ import javax.inject.Inject
 class GetCountersListUseCase @Inject constructor(
     private val repository: CountersRepository,
     dispatcher: CoroutineDispatcher,
-) : FlowUseCase<Unit, List<Counter>>(dispatcher) {
+) : FlowUseCase<Unit?, List<Counter>>(dispatcher) {
 
-    override fun execute(parameters: Unit): Flow<Result<List<Counter>>> =
+    override fun execute(parameters: Unit?): Flow<Result<List<Counter>>> =
         repository.getCountersList()
 }

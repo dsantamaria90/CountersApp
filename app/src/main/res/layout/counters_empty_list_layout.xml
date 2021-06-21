@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal_3"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_large"
+            android:text="@string/no_counters"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal_1"
+            android:layout_marginHorizontal="@dimen/margin_normal_3"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_default"
+            android:text="@string/no_counters_phrase"/>
+
+    </LinearLayout>
+
+</layout>

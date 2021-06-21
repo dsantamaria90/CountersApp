@@ -15,4 +15,9 @@
         android:name="com.cornershop.counterstest.presentation.counters.CountersFragment"
         tools:layout="@layout/fragment_counters"/>
 
+    <fragment
+        android:id="@+id/add_counter_fragment"
+        android:name="com.cornershop.counterstest.presentation.counters.addcounter.AddCounterFragment"
+        tools:layout="@layout/fragment_add_counter"/>
+
 </navigation>

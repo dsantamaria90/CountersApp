@@ -6,4 +6,12 @@
     <dimen name="margin_normal_1">16dp</dimen>
     <dimen name="margin_normal_2">24dp</dimen>
     <dimen name="margin_normal_3">32dp</dimen>
+
+    <dimen name="text_default">17sp</dimen>
+    <dimen name="text_big">20sp</dimen>
+    <dimen name="text_large">22sp</dimen>
+
+    <dimen name="add_counter_corner_radius">54dp</dimen>
+    <dimen name="search_view_corner_radius">8dp</dimen>
+    <dimen name="search_view_elevation">8dp</dimen>
 </resources>
