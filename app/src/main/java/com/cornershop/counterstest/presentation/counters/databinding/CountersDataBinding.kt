@@ -1,6 +1,7 @@
 package com.cornershop.counterstest.presentation.counters.databinding
 
 import android.view.View
+import android.widget.SearchView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,7 +31,18 @@ fun View.setVisibility(isVisible: Boolean) {
     }
 }
 
-@BindingAdapter("loading", "decrementable")
+@BindingAdapter(value = ["loading", "decrementable"], requireAll = true)
 fun View.setEnabled(isLoading: Boolean, isDecrementable: Boolean) {
     isEnabled = !isLoading && isDecrementable
+}
+
+@BindingAdapter("textChanged")
+fun SearchView.setTextChangedListener(call: (String) -> Unit) {
+    setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        override fun onQueryTextChange(text: String?): Boolean {
+            call(text ?: "")
+            return true
+        }
+        override fun onQueryTextSubmit(text: String?): Boolean = false
+    })
 }

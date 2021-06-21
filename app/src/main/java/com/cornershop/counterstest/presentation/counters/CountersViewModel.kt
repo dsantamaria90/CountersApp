@@ -1,7 +1,10 @@
 package com.cornershop.counterstest.presentation.counters
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations.map
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.cornershop.counterstest.domain.entity.Counter
 import com.cornershop.counterstest.domain.entity.ModifyCounterType
 import com.cornershop.counterstest.domain.entity.ModifyCounterUseCaseArgs
@@ -9,6 +12,7 @@ import com.cornershop.counterstest.domain.entity.Result
 import com.cornershop.counterstest.domain.usecase.GetCountersListUseCase
 import com.cornershop.counterstest.domain.usecase.ModifyCounterUseCase
 import com.cornershop.counterstest.domain.usecase.RefreshCountersListUseCase
+import com.cornershop.counterstest.presentation.entity.CounterView
 import com.cornershop.counterstest.presentation.entity.ModifyCounterError
 import com.cornershop.counterstest.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,45 +28,21 @@ class CountersViewModel @Inject constructor(
     private val modifyCounterUseCase: ModifyCounterUseCase
 ) : ViewModel() {
 
-    private val _isError = MutableLiveData(false)
-    private val _isCountersListLoading = MutableLiveData(false)
-    private val _countersList = MutableLiveData<List<Counter>>(emptyList())
-    private val _goToAddCounter = MutableLiveData<Event<Unit>>()
-    private val _modifyCounterError = MutableLiveData<Event<ModifyCounterError>>()
-
-    val isCountersListLoading: LiveData<Boolean> get() = _isCountersListLoading
-    val countersList: LiveData<List<Counter>> get() = _countersList
+    val isLoading: LiveData<Boolean> get() = _isLoading
+    val filteredCountersList: LiveData<List<Counter>> get() = _filteredCountersList
     val goToAddCounter: LiveData<Event<Unit>> get() = _goToAddCounter
     val modifyCounterError: LiveData<Event<ModifyCounterError>> get() = _modifyCounterError
-    val summedCounters: LiveData<Int> = map(countersList) { list -> list.sumBy { it.count } }
-    val showCountersList: LiveData<Boolean> = map(countersList) { it.isNotEmpty() }
-    val isLoading: LiveData<Boolean> = getAllSources(isLoading())
-    val showEmptyCounters: LiveData<Boolean> = getAllSources(showEmptyCounters())
-    val showError: LiveData<Boolean> = getAllSources(showError())
+    val viewToShow: LiveData<CounterView> get() = _viewToShow
 
-    private fun getAllSources(call: () -> Boolean) = MediatorLiveData<Boolean>().apply {
-        addSource(countersList) { postValue(call()) }
-        addSource(_isCountersListLoading) { postValue(call()) }
-        addSource(_isError) { postValue(call()) }
-    }
+    private val _isLoading = MutableLiveData<Boolean>()
+    private val _filteredCountersList = MutableLiveData<List<Counter>>(emptyList())
+    private val _goToAddCounter = MutableLiveData<Event<Unit>>()
+    private val _modifyCounterError = MutableLiveData<Event<ModifyCounterError>>()
+    private val _viewToShow = MutableLiveData(CounterView.NONE)
+    private var countersList = emptyList<Counter>()
+    private var lastSearchedQuery = ""
 
-    private fun isLoading(): () -> Boolean = {
-        countersList.value.isNullOrEmpty() &&
-            _isCountersListLoading.value == true &&
-            _isError.value == false
-    }
-
-    private fun showEmptyCounters(): () -> Boolean = {
-        countersList.value.isNullOrEmpty() &&
-            _isCountersListLoading.value == false &&
-            _isError.value == false
-    }
-
-    private fun showError(): () -> Boolean = {
-        countersList.value.isNullOrEmpty() &&
-            _isCountersListLoading.value == false &&
-            _isError.value == true
-    }
+    val summedCounters: LiveData<Int> = map(filteredCountersList) { list -> list.sumBy { it.count } }
 
     init {
         loadCountersList()
@@ -73,21 +53,47 @@ class CountersViewModel @Inject constructor(
         viewModelScope.launch {
             getCountersListUseCase(null).collect { result ->
                 when (result) {
-                    is Result.Success -> _countersList.postValue(result.data)
+                    is Result.Success -> {
+                        countersList = result.data
+                        filterCountersList()
+                    }
                 }
             }
         }
     }
 
+    private fun filterCountersList() {
+        _filteredCountersList.value = countersList.filter { it.title.contains(lastSearchedQuery) }
+        setViewToShow()
+    }
+
+    private fun setViewToShow() {
+        val isLoading = _isLoading.value == true
+        val isEmpty = filteredCountersList.value?.isNullOrEmpty() == true
+        _viewToShow.value = if (isEmpty && lastSearchedQuery.isNotEmpty() && !isLoading) {
+            CounterView.NO_SEARCH_RESULTS
+        } else if (isEmpty && !isLoading) {
+            CounterView.EMPTY_COUNTERS_LIST
+        } else if (!isEmpty) {
+            CounterView.COUNTERS_LIST
+        } else {
+            CounterView.NONE
+        }
+    }
+
     fun onRefresh() {
         viewModelScope.launch {
-            _isCountersListLoading.postValue(true)
+            _isLoading.value = true
             delay(2000) // TODO delete
-            refreshCountersListUseCase(null).also {
-                _isCountersListLoading.postValue(false)
-                _isError.postValue(it is Result.Error)
+            refreshCountersListUseCase(null).also { result ->
+                _isLoading.value = false
+                when (result) {
+                    is Result.Success -> setViewToShow()
+                    is Result.Error -> if (filteredCountersList.value?.isNullOrEmpty() == true) {
+                        _viewToShow.value = CounterView.ERROR
+                    }
+                }
             }
-
         }
     }
 
@@ -103,10 +109,10 @@ class CountersViewModel @Inject constructor(
 
     private fun modifyCounter(counter: Counter, type: ModifyCounterType) {
         viewModelScope.launch {
-            _isCountersListLoading.postValue(true)
+            _isLoading.value = true
             delay(2000) // TODO delete
             modifyCounterUseCase(ModifyCounterUseCaseArgs(counter.id, type)).also { result ->
-                _isCountersListLoading.postValue(false)
+                _isLoading.value = false
                 when (result) {
                     is Result.Error -> setModifyCounterError(counter, type)
                 }
@@ -115,12 +121,12 @@ class CountersViewModel @Inject constructor(
     }
 
     private fun setModifyCounterError(counter: Counter, type: ModifyCounterType) {
-        _modifyCounterError.postValue(Event(
+        _modifyCounterError.value = Event(
             ModifyCounterError(counter, type, counter.count + when (type) {
                 ModifyCounterType.INCREMENT -> NEXT_COUNT
                 ModifyCounterType.DECREMENT -> PREVIOUS_COUNT
             })
-        ))
+        )
     }
 
     fun onRetryModifyCounterClicked(modifyCounter: ModifyCounterError) {
@@ -131,13 +137,18 @@ class CountersViewModel @Inject constructor(
 
     fun onRetryLoadCountersClicked() = object : CounterRetryClickListener  {
         override fun onRetryClicked() {
-            _isError.postValue(false)
+            _viewToShow.value = CounterView.NONE
             onRefresh()
         }
     }
 
     fun onAddCounterClicked() {
-        _goToAddCounter.postValue(Event(Unit))
+        _goToAddCounter.value = Event(Unit)
+    }
+
+    fun onSearchQueryChanged(): (String) -> Unit = {
+        lastSearchedQuery = it.trim()
+        filterCountersList()
     }
 
     companion object {

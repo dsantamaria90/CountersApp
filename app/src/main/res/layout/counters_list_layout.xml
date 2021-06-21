@@ -22,7 +22,7 @@
             android:layout_marginStart="@dimen/margin_normal_2"
             android:textColor="@color/black"
             android:textSize="@dimen/text_default"
-            android:text="@{@string/n_items(vm.countersList.size)}"
+            android:text="@{@string/n_items(vm.filteredCountersList.size)}"
             tools:text="4 items"/>
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/items_count_tv"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:refreshing="@{vm.isCountersListLoading}"
+            app:refreshing="@{vm.isLoading}"
             app:onRefreshListener="@{() -> vm.onRefresh()}">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -50,8 +50,8 @@
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
                 listener="@{vm.onCounterItemClicked()}"
-                countersList="@{vm.countersList}"
-                loading="@{vm.isCountersListLoading}"/>
+                countersList="@{vm.filteredCountersList}"
+                loading="@{vm.isLoading}"/>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

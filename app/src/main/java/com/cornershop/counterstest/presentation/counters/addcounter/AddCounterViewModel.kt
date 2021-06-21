@@ -17,23 +17,23 @@ class AddCounterViewModel @Inject constructor(
     private val addCounterUseCase: AddCounterUseCase
 ) : ViewModel() {
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    private val _error = MutableLiveData<Event<Unit>>()
-    private val _goToCounters = MutableLiveData<Event<Unit>>()
-
     val isLoading: LiveData<Boolean> get() = _isLoading
     val error: LiveData<Event<Unit>> get() = _error
     val goToCounters: LiveData<Event<Unit>> get() = _goToCounters
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    private val _error = MutableLiveData<Event<Unit>>()
+    private val _goToCounters = MutableLiveData<Event<Unit>>()
+
     fun onSaveClicked(title: String) {
         viewModelScope.launch {
-            _isLoading.postValue(true)
+            _isLoading.value = true
             delay(2000) // TODO delete
             addCounterUseCase(title.trim()).also { result ->
-                _isLoading.postValue(false)
+                _isLoading.value = false
                 when (result) {
-                    is Result.Success -> _goToCounters.postValue(Event(Unit))
-                    is Result.Error -> _error.postValue(Event(Unit))
+                    is Result.Success -> _goToCounters.value = Event(Unit)
+                    is Result.Error -> _error.value = Event(Unit)
                 }
             }
         }

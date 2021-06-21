@@ -13,7 +13,7 @@ class WelcomeViewModel : ViewModel() {
 
     fun listener() = object : WelcomeViewClickListener {
         override fun onGetStartedClicked() {
-            _goToCountersList.postValue(Event(Unit))
+            _goToCountersList.value = Event(Unit)
         }
     }
 }

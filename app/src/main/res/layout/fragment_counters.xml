@@ -8,6 +8,7 @@
         <variable
             name="vm"
             type="com.cornershop.counterstest.presentation.counters.CountersViewModel"/>
+        <import type="com.cornershop.counterstest.presentation.entity.CounterView"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +25,8 @@
             android:background="@drawable/search_view_background"
             android:elevation="@dimen/search_view_elevation"
             android:queryHint="@string/search_counters"
-            android:iconifiedByDefault="false"/>
+            android:iconifiedByDefault="false"
+            textChanged="@{vm.onSearchQueryChanged()}"/>
 
         <include
             android:layout_width="match_parent"
@@ -34,7 +36,7 @@
             android:layout_marginTop="@dimen/margin_normal_1"
             layout="@layout/counters_list_layout"
             bind:vm="@{vm}"
-            visibility="@{vm.showCountersList}"
+            visibility="@{vm.viewToShow == CounterView.COUNTERS_LIST}"
             tools:visibility="visible"/>
 
         <include
@@ -43,7 +45,7 @@
             app:layout_constraintTop_toBottomOf="@id/search_view"
             app:layout_constraintBottom_toBottomOf="parent"
             layout="@layout/counters_empty_list_layout"
-            visibility="@{vm.showEmptyCounters}"
+            visibility="@{vm.viewToShow == CounterView.EMPTY_COUNTERS_LIST}"
             tools:visibility="gone"/>
 
         <include
@@ -53,7 +55,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             layout="@layout/counters_error_layout"
             bind:listener="@{vm.onRetryLoadCountersClicked()}"
-            visibility="@{vm.showError}"
+            visibility="@{vm.viewToShow == CounterView.ERROR}"
+            tools:visibility="gone"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/search_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/no_results"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_large"
+            visibility="@{vm.viewToShow == CounterView.NO_SEARCH_RESULTS}"
             tools:visibility="gone"/>
 
         <ProgressBar
@@ -65,7 +80,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:indeterminate="true"
             android:indeterminateTint="@color/orange"
-            visibility="@{vm.isLoading}"/>
+            visibility="@{vm.viewToShow == CounterView.NONE &amp;&amp; vm.isLoading}"/>
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"

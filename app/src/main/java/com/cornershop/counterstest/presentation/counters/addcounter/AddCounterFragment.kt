@@ -27,11 +27,9 @@ class AddCounterFragment : BaseFragment<AddCounterViewModel>() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentAddCounterBinding.inflate(layoutInflater, container, false)
-        return binding.bindLayout {
-            vm = viewModel
-        }
+    ): View = FragmentAddCounterBinding.inflate(layoutInflater, container, false).bindLayout {
+        vm = viewModel
+        binding = this
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
