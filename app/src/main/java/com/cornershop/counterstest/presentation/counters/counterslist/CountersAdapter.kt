@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cornershop.counterstest.databinding.CounterItemLayoutBinding
-import com.cornershop.counterstest.presentation.entity.CounterUI
+import com.cornershop.counterstest.presentation.counters.entity.CounterUI
 
 class CountersAdapter(
     private val listener: CounterItemClickListener

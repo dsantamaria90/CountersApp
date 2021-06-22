@@ -3,7 +3,7 @@ package com.cornershop.counterstest.data.di
 import android.content.Context
 import androidx.room.Room
 import com.cornershop.counterstest.data.AppDatabase
-import com.cornershop.counterstest.data.dao.CountersDao
+import com.cornershop.counterstest.data.counters.dao.CountersDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

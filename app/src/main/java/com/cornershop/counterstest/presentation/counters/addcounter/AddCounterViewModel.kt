@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cornershop.counterstest.domain.counters.usecase.AddCounterUseCase
 import com.cornershop.counterstest.domain.entity.Result
-import com.cornershop.counterstest.domain.usecase.AddCounterUseCase
 import com.cornershop.counterstest.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

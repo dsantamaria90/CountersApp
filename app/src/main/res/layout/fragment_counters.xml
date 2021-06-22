@@ -8,7 +8,7 @@
         <variable
             name="vm"
             type="com.cornershop.counterstest.presentation.counters.counterslist.CountersViewModel"/>
-        <import type="com.cornershop.counterstest.presentation.entity.CounterView"/>
+        <import type="com.cornershop.counterstest.presentation.counters.entity.CounterView"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

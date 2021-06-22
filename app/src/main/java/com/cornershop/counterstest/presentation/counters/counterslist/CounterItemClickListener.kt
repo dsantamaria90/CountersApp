@@ -1,6 +1,6 @@
 package com.cornershop.counterstest.presentation.counters.counterslist
 
-import com.cornershop.counterstest.presentation.entity.CounterUI
+import com.cornershop.counterstest.presentation.counters.entity.CounterUI
 
 interface CounterItemClickListener {
 

@@ -1,7 +1,7 @@
 package com.cornershop.counterstest.data.di
 
 import com.cornershop.counterstest.data.ServerConstants.BASE_URL
-import com.cornershop.counterstest.data.service.CountersService
+import com.cornershop.counterstest.data.counters.service.CountersService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
