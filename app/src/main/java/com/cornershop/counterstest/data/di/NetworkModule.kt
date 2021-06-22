@@ -1,5 +1,6 @@
 package com.cornershop.counterstest.data.di
 
+import com.cornershop.counterstest.data.ServerConstants.BASE_URL
 import com.cornershop.counterstest.data.service.CountersService
 import dagger.Module
 import dagger.Provides
@@ -18,7 +19,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun providesRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.1.4:3000/api/v1/")
+        .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

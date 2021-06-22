@@ -6,21 +6,28 @@
     <data>
         <variable
             name="counter"
-            type="com.cornershop.counterstest.domain.entity.Counter"/>
+            type="com.cornershop.counterstest.presentation.entity.CounterUI"/>
         <variable
             name="listener"
-            type="com.cornershop.counterstest.presentation.counters.CounterItemClickListener"/>
+            type="com.cornershop.counterstest.presentation.counters.counterslist.CounterItemClickListener"/>
         <variable
             name="isLoading"
+            type="Boolean"/>
+        <variable
+            name="isEditing"
             type="Boolean"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/margin_normal_2"
+        android:paddingStart="@dimen/margin_normal_1"
         android:paddingEnd="@dimen/margin_normal_1"
-        android:paddingVertical="@dimen/margin_normal_1">
+        android:paddingVertical="@dimen/margin_normal_1"
+        android:layout_marginHorizontal="@dimen/margin_small"
+        android:onClick="@{() -> listener.onClicked(counter)}"
+        onLongClick="@{() -> listener.onLongClicked(counter)}"
+        background="@{counter.selected}">
 
         <TextView
             android:id="@+id/title_tv"
@@ -49,7 +56,8 @@
             android:tint="@color/modify_counter_state_color"
             android:background="@android:color/transparent"
             android:importantForAccessibility="no"
-            android:enabled="@{!isLoading}"/>
+            android:enabled="@{!isLoading}"
+            visibilityNoGone="@{!isEditing}"/>
 
         <TextView
             android:id="@+id/counter_tv"
@@ -62,6 +70,7 @@
             android:text="@{String.valueOf(counter.count)}"
             android:textColor="@color/black"
             android:textSize="@dimen/text_big"
+            visibilityNoGone="@{!isEditing}"
             tools:text="5"/>
 
         <ImageButton
@@ -79,7 +88,20 @@
             android:background="@android:color/transparent"
             android:importantForAccessibility="no"
             loading="@{isLoading}"
-            decrementable="@{counter.decrementable}"/>
+            decrementable="@{counter.decrementable}"
+            visibilityNoGone="@{!isEditing}"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:src="@drawable/ic_check"
+            visibility="@{counter.selected}"
+            android:importantForAccessibility="no"
+            tools:visibility="gone"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

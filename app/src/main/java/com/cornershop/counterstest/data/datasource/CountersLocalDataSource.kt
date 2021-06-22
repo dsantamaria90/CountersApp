@@ -11,5 +11,5 @@ class CountersLocalDataSource @Inject constructor(private val dao: CountersDao) 
 
     fun getCountersList(): Flow<List<Counter>> = dao.getCountersList()
 
-    suspend fun deleteCountersList() = dao.deleteCountersList()
+    suspend fun deleteCountersNotIn(idsList: List<String>) = dao.deleteCountersNotIn(idsList)
 }

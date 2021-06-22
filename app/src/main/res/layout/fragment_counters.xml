@@ -7,7 +7,7 @@
     <data>
         <variable
             name="vm"
-            type="com.cornershop.counterstest.presentation.counters.CountersViewModel"/>
+            type="com.cornershop.counterstest.presentation.counters.counterslist.CountersViewModel"/>
         <import type="com.cornershop.counterstest.presentation.entity.CounterView"/>
     </data>
 
@@ -26,6 +26,7 @@
             android:elevation="@dimen/search_view_elevation"
             android:queryHint="@string/search_counters"
             android:iconifiedByDefault="false"
+            visibility="@{!vm.isEditing}"
             textChanged="@{vm.onSearchQueryChanged()}"/>
 
         <include
@@ -94,7 +95,8 @@
             app:icon="@drawable/ic_plus"
             app:iconTint="@color/white"
             android:background="@drawable/add_counter_button_background"
-            android:onClick="@{() -> vm.onAddCounterClicked()}"/>
+            android:onClick="@{() -> vm.onAddCounterClicked()}"
+            visibility="@{!vm.isEditing}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

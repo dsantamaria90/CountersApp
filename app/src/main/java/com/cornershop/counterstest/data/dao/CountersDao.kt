@@ -16,6 +16,6 @@ interface CountersDao {
     @Query("SELECT * FROM Counter")
     fun getCountersList(): Flow<List<Counter>>
 
-    @Query("DELETE FROM Counter")
-    suspend fun deleteCountersList()
+    @Query("DELETE FROM Counter WHERE id NOT IN (:idsList)")
+    suspend fun deleteCountersNotIn(idsList: List<String>)
 }

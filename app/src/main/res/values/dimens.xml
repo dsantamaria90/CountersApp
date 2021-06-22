@@ -12,10 +12,12 @@
     <dimen name="text_big">20sp</dimen>
     <dimen name="text_large">22sp</dimen>
 
-    <dimen name="add_counter_corner_radius">54dp</dimen>
-    <dimen name="search_view_corner_radius">8dp</dimen>
+    <dimen name="huge_corner_radius">54dp</dimen>
+    <dimen name="small_corner_radius">8dp</dimen>
     <dimen name="search_view_elevation">8dp</dimen>
 
     <dimen name="progress_bar_container_width">54dp</dimen>
     <dimen name="progress_bar_length">24dp</dimen>
+
+    <dimen name="counter_item_min_height">72dp</dimen>
 </resources>

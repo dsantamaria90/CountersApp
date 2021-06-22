@@ -7,5 +7,6 @@ import com.cornershop.counterstest.domain.entity.Counter
 
 @Database(entities = [Counter::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
+
     abstract fun countersDao(): CountersDao
 }

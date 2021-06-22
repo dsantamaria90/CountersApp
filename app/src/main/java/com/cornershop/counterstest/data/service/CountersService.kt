@@ -4,8 +4,8 @@ import com.cornershop.counterstest.data.entity.AddCounter
 import com.cornershop.counterstest.data.entity.ModifyCounter
 import com.cornershop.counterstest.domain.entity.Counter
 import retrofit2.http.Body
-import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.POST
 
 interface CountersService {
@@ -16,7 +16,7 @@ interface CountersService {
     @POST(COUNTER)
     suspend fun addCounter(@Body addCounter: AddCounter): List<Counter>
 
-    @DELETE(COUNTER)
+    @HTTP(method = "DELETE", path = COUNTER, hasBody = true)
     suspend fun deleteCounter(@Body modifyCounter: ModifyCounter): List<Counter>
 
     @POST("$COUNTER/inc")

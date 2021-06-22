@@ -12,7 +12,7 @@
 
     <fragment
         android:id="@+id/counters_list_fragment"
-        android:name="com.cornershop.counterstest.presentation.counters.CountersFragment"
+        android:name="com.cornershop.counterstest.presentation.counters.counterslist.CountersFragment"
         tools:layout="@layout/fragment_counters"/>
 
     <fragment

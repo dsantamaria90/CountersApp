@@ -11,8 +11,8 @@ class WelcomeViewModel : ViewModel() {
 
     private val _goToCountersList = MutableLiveData<Event<Unit>>()
 
-    fun listener() = object : WelcomeViewClickListener {
-        override fun onGetStartedClicked() {
+    fun onGetStartedClicked() = object : GetStartedClickListener {
+        override fun onClicked() {
             _goToCountersList.value = Event(Unit)
         }
     }

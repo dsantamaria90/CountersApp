@@ -5,7 +5,7 @@
     <data>
         <variable
             name="listener"
-            type="com.cornershop.counterstest.presentation.welcome.WelcomeViewClickListener" />
+            type="com.cornershop.counterstest.presentation.welcome.GetStartedClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +54,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> listener.onGetStartedClicked()}" />
+            android:onClick="@{() -> listener.onClicked()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

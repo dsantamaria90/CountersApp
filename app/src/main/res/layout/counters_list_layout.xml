@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.cornershop.counterstest.presentation.counters.CountersViewModel"/>
+            type="com.cornershop.counterstest.presentation.counters.counterslist.CountersViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +43,8 @@
             app:layout_constraintTop_toBottomOf="@id/items_count_tv"
             app:layout_constraintBottom_toBottomOf="parent"
             app:refreshing="@{vm.isLoading}"
-            app:onRefreshListener="@{() -> vm.onRefresh()}">
+            app:onRefreshListener="@{() -> vm.onRefresh()}"
+            android:enabled="@{!vm.isEditing}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -51,7 +52,8 @@
                 android:scrollbars="vertical"
                 listener="@{vm.onCounterItemClicked()}"
                 countersList="@{vm.filteredCountersList}"
-                loading="@{vm.isLoading}"/>
+                loading="@{vm.isLoading}"
+                editing="@{vm.isEditing}"/>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

@@ -1,21 +1,27 @@
-package com.cornershop.counterstest.presentation.counters
+package com.cornershop.counterstest.presentation.counters.counterslist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cornershop.counterstest.databinding.CounterItemLayoutBinding
-import com.cornershop.counterstest.domain.entity.Counter
+import com.cornershop.counterstest.presentation.entity.CounterUI
 
 class CountersAdapter(
     private val listener: CounterItemClickListener
 ) : RecyclerView.Adapter<CountersAdapter.ViewHolder>() {
 
-    private var countersList = emptyList<Counter>()
+    private var countersList = emptyList<CounterUI>()
     private var isLoading = false
+    private var isEditing = false
 
-    fun set(countersList: List<Counter>, isLoading: Boolean) {
+    fun set(
+        countersList: List<CounterUI>,
+        isLoading: Boolean,
+        isEditing: Boolean
+    ) {
         this.countersList = countersList
         this.isLoading = isLoading
+        this.isEditing = isEditing
         notifyDataSetChanged()
     }
 
@@ -38,11 +44,12 @@ class CountersAdapter(
         private val binding: CounterItemLayoutBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(counter: Counter) {
+        fun bind(counter: CounterUI) {
             binding.apply {
                 this.counter = counter
                 this.listener = this@CountersAdapter.listener
                 this.isLoading = this@CountersAdapter.isLoading
+                this.isEditing = this@CountersAdapter.isEditing
             }
         }
     }

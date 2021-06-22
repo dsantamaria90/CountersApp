@@ -23,8 +23,8 @@ class CountersRepositoryImpl @Inject constructor(
 
     private suspend fun Result<List<Counter>>.saveList(): Result<Unit> = when (this) {
         is Result.Success -> {
-            // Delete all counters in case the same user is logged on another device deleting a counter
-            local.deleteCountersList()
+            // Delete counters not present in case the same user is logged on another device deleting a counter
+            local.deleteCountersNotIn(data.map { it.id })
             local.saveCountersList(data)
             Result.Success(Unit)
         }

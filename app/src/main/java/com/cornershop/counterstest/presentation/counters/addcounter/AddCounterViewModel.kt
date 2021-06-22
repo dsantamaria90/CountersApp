@@ -8,7 +8,6 @@ import com.cornershop.counterstest.domain.entity.Result
 import com.cornershop.counterstest.domain.usecase.AddCounterUseCase
 import com.cornershop.counterstest.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,7 +27,6 @@ class AddCounterViewModel @Inject constructor(
     fun onSaveClicked(title: String) {
         viewModelScope.launch {
             _isLoading.value = true
-            delay(2000) // TODO delete
             addCounterUseCase(title.trim()).also { result ->
                 _isLoading.value = false
                 when (result) {
