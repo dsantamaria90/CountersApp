@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cornershop.counterstest.R
 import com.cornershop.counterstest.presentation.counters.counterslist.CounterItemClickListener
 import com.cornershop.counterstest.presentation.counters.counterslist.CountersAdapter
-import com.cornershop.counterstest.presentation.counters.entity.CounterUI
+import com.cornershop.counterstest.presentation.counters.counterslist.entity.CounterUI
 
 @BindingAdapter(value = ["listener", "countersList", "loading", "editing"], requireAll = true)
 fun RecyclerView.setAdapter(

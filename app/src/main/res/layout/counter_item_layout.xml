@@ -6,7 +6,7 @@
     <data>
         <variable
             name="counter"
-            type="com.cornershop.counterstest.presentation.counters.entity.CounterUI"/>
+            type="com.cornershop.counterstest.presentation.counters.counterslist.entity.CounterUI"/>
         <variable
             name="listener"
             type="com.cornershop.counterstest.presentation.counters.counterslist.CounterItemClickListener"/>

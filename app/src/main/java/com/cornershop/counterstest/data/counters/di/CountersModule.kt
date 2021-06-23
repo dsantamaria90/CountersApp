@@ -1,4 +1,4 @@
-package com.cornershop.counterstest.data.di
+package com.cornershop.counterstest.data.counters.di
 
 import com.cornershop.counterstest.data.counters.repository.CountersRepositoryImpl
 import com.cornershop.counterstest.domain.counters.repository.CountersRepository
@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DataModule {
+abstract class CountersModule {
 
     @Binds
     abstract fun bindCountersRepository(repository: CountersRepositoryImpl): CountersRepository

@@ -1,4 +1,4 @@
-package com.cornershop.counterstest.presentation.counters.entity
+package com.cornershop.counterstest.presentation.counters.counterslist.entity
 
 data class CounterUI(
     val id: String,

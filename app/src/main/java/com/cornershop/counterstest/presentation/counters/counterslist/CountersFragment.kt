@@ -53,7 +53,7 @@ class CountersFragment : BaseFragment<CountersViewModel>() {
                 negativeButtonText = R.string.retry
             ) { isPositive ->
                 if (!isPositive) {
-                    viewModel.onRetryModifyCounterClicked(it)
+                    viewModel.onModifyCounter(it.counter, it.type)
                 }
             }
         }
