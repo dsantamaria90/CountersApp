@@ -2,7 +2,7 @@ package com.cornershop.counterstest.presentation.counters.addcounter
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import com.cornershop.counterstest.R
 import com.cornershop.counterstest.databinding.FragmentAddCounterBinding
@@ -13,9 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AddCounterFragment : BaseFragment<AddCounterViewModel>() {
 
-    override val viewModel: AddCounterViewModel by viewModels()
+    override val viewModel: AddCounterViewModel by hiltNavGraphViewModels(R.id.add_counter_graph)
 
-    private lateinit var binding: FragmentAddCounterBinding
     private var saveItem: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +28,6 @@ class AddCounterFragment : BaseFragment<AddCounterViewModel>() {
         savedInstanceState: Bundle?
     ): View = FragmentAddCounterBinding.inflate(layoutInflater, container, false).bindLayout {
         vm = viewModel
-        binding = this
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,6 +49,9 @@ class AddCounterFragment : BaseFragment<AddCounterViewModel>() {
         viewModel.goToCounters.observeEvent {
             findNavController().popBackStack()
         }
+        viewModel.goToExamples.observeEvent {
+            findNavController().navigate(R.id.select_counter_fragment)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -61,7 +62,7 @@ class AddCounterFragment : BaseFragment<AddCounterViewModel>() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.save) {
             saveItem = item
-            viewModel.onSaveClicked(binding.titleEt.text.toString())
+            viewModel.onSaveClicked()
             return true
         }
         return super.onOptionsItemSelected(item)

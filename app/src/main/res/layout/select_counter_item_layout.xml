@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="listener"
+            type="com.cornershop.counterstest.presentation.counters.selectcounter.SelectCounterClickListener"/>
+        <variable
+            name="title"
+            type="String"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/margin_small">
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@{title}"
+            android:onClick="@{() -> listener.onClicked(title)}"
+            style="@style/Content"
+            tools:text="Cups of coffee"/>
+
+    </FrameLayout>
+
+</layout>

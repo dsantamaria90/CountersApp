@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.cornershop.counterstest.presentation.counters.addcounter.AddCounterViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/margin_normal_1">
+
+        <TextView
+            android:id="@+id/instructions_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/margin_normal_1"
+            style="@style/Description"
+            android:text="@string/examples_description"/>
+
+        <TextView
+            android:id="@+id/drinks_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/instructions_tv"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/margin_normal_1"
+            style="@style/SubTitle"
+            android:text="@string/drinks"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/drinks_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/drinks_tv"
+            listener="@{vm.onCounterClicked()}"
+            countersList="@{@stringArray/drinks_array}"/>
+
+        <TextView
+            android:id="@+id/food_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/drinks_rv"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/margin_normal_1"
+            style="@style/SubTitle"
+            android:text="@string/food"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/food_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/food_tv"
+            listener="@{vm.onCounterClicked()}"
+            countersList="@{@stringArray/food_array}"/>
+
+        <TextView
+            android:id="@+id/misc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/food_rv"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/margin_normal_1"
+            style="@style/SubTitle"
+            android:text="@string/misc"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/misc_tv"
+            listener="@{vm.onCounterClicked()}"
+            countersList="@{@stringArray/misc_array}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

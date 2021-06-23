@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cornershop.counterstest.R
 import com.cornershop.counterstest.databinding.FragmentCountersBinding
 import com.cornershop.counterstest.presentation.base.BaseFragment
+import com.cornershop.counterstest.presentation.extension.appCompatActivity
 import com.cornershop.counterstest.presentation.extension.showAlertDialog
 import com.cornershop.counterstest.presentation.util.actionmode.ActionModeDelegate
 import com.cornershop.counterstest.presentation.util.share.ShareDelegate
@@ -39,7 +39,7 @@ class CountersFragment : BaseFragment<CountersViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         setActionModeDelegate()
         viewModel.goToAddCounter.observeEvent {
-            findNavController().navigate(R.id.add_counter_fragment)
+            findNavController().navigate(R.id.add_counter_graph)
         }
         viewModel.modifyCounterError.observeEvent {
             showAlertDialog(
@@ -59,7 +59,7 @@ class CountersFragment : BaseFragment<CountersViewModel>() {
         }
         viewModel.isEditing.observe { isEditing ->
             if (isEditing) {
-                (activity as? AppCompatActivity)?.let { actionModeDelegate.start(it) }
+                appCompatActivity?.let { actionModeDelegate.start(it) }
             } else {
                 actionModeDelegate.finish()
             }

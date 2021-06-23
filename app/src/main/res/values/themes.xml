@@ -34,4 +34,35 @@
     <style name="AlertDialogButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/orange</item>
     </style>
+
+    <style name="Title">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SubTitle">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">@dimen/text_default</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="SubTitleRegular">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">@dimen/text_default</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Description">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Content">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">@dimen/text_default</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>

@@ -2,6 +2,7 @@ package com.cornershop.counterstest.presentation.extension
 
 import android.app.AlertDialog
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.cornershop.counterstest.R
 
@@ -20,3 +21,5 @@ fun Fragment.showAlertDialog(
         create()
     }.show()
 }
+
+val Fragment.appCompatActivity get() = activity as? AppCompatActivity

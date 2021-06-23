@@ -22,6 +22,7 @@
             android:layout_marginStart="@dimen/margin_normal_2"
             android:textColor="@color/black"
             android:textSize="@dimen/text_default"
+            android:fontFamily="sans-serif-medium"
             android:text="@{@string/n_items(vm.filteredCountersList.size)}"
             tools:text="4 items"/>
 
@@ -32,8 +33,7 @@
             app:layout_constraintTop_toTopOf="@id/items_count_tv"
             app:layout_constraintLeft_toRightOf="@id/items_count_tv"
             android:layout_marginStart="@dimen/margin_normal_1"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/text_default"
+            style="@style/SubTitle"
             android:text="@{@string/n_items(vm.summedCounters)}"
             tools:text="17 items"/>
 

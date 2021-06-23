@@ -2,11 +2,11 @@ package com.cornershop.counterstest.presentation.base
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.cornershop.counterstest.presentation.extension.appCompatActivity
 import com.cornershop.counterstest.presentation.util.Event
 import com.cornershop.counterstest.presentation.util.EventObserver
 
@@ -17,7 +17,7 @@ abstract class BaseFragment<T : ViewModel> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.supportActionBar?.let {
+        appCompatActivity?.supportActionBar?.let {
             if (shouldShowToolbar) {
                 it.show()
             } else {

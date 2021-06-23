@@ -26,6 +26,7 @@
             android:elevation="@dimen/search_view_elevation"
             android:queryHint="@string/search_counters"
             android:iconifiedByDefault="false"
+            style="@style/Content"
             visibility="@{!vm.isEditing}"
             textChanged="@{vm.onSearchQueryChanged()}"/>
 
@@ -92,6 +93,8 @@
             android:layout_marginBottom="@dimen/margin_big_1"
             android:text="@string/add_counters"
             android:textColor="@color/white"
+            android:textSize="@dimen/text_small"
+            android:fontFamily="sans-serif-medium"
             app:icon="@drawable/ic_plus"
             app:iconTint="@color/white"
             android:background="@drawable/add_counter_button_background"

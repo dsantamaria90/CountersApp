@@ -11,7 +11,7 @@ import com.cornershop.counterstest.presentation.counters.counterslist.CountersAd
 import com.cornershop.counterstest.presentation.counters.entity.CounterUI
 
 @BindingAdapter(value = ["listener", "countersList", "loading", "editing"], requireAll = true)
-fun RecyclerView.setCountersAdapter(
+fun RecyclerView.setAdapter(
     listener: CounterItemClickListener,
     countersList: List<CounterUI>,
     isLoading: Boolean,

@@ -5,6 +5,8 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/welcome_fragment">
 
+    <include app:graph="@navigation/add_counter_graph"/>
+
     <fragment
         android:id="@+id/welcome_fragment"
         android:name="com.cornershop.counterstest.presentation.welcome.WelcomeFragment"
@@ -15,10 +17,8 @@
         android:name="com.cornershop.counterstest.presentation.counters.counterslist.CountersFragment"
         tools:layout="@layout/fragment_counters"/>
 
-    <fragment
-        android:id="@+id/add_counter_fragment"
-        android:name="com.cornershop.counterstest.presentation.counters.addcounter.AddCounterFragment"
-        android:label="@string/create_counter"
-        tools:layout="@layout/fragment_add_counter" />
+    <action
+        android:id="@+id/action_add_counter"
+        app:destination="@+id/add_counter_graph" />
 
 </navigation>

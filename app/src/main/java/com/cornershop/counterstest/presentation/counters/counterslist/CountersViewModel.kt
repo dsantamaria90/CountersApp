@@ -25,6 +25,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+// TODO ReadCountersViewModelDelegate UpdateCountersViewModelDelegate
 @HiltViewModel
 class CountersViewModel @Inject constructor(
     private val getCountersListUseCase: GetCountersListUseCase,

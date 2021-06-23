@@ -10,22 +10,34 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/margin_normal_1">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/title_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginHorizontal="@dimen/margin_normal_1">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/title_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/counter_name_label"
+                android:text="@={vm.title}"
+                style="@style/Content"
                 android:background="@android:color/transparent"/>
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title_til"
+            android:layout_marginTop="@dimen/margin_normal_1"
+            style="@style/Description"
+            android:text="@string/create_counter_disclaimer"
+            android:onClick="@{() -> vm.onSeeExamplesClicked()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

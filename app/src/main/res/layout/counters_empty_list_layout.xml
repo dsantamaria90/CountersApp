@@ -11,8 +11,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_normal_3"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_large"
+            style="@style/Title"
             android:text="@string/no_counters"/>
 
         <TextView
@@ -21,8 +20,7 @@
             android:layout_marginTop="@dimen/margin_normal_1"
             android:layout_marginHorizontal="@dimen/margin_normal_3"
             android:gravity="center"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/text_default"
+            style="@style/SubTitleRegular"
             android:text="@string/no_counters_phrase"/>
 
     </LinearLayout>
