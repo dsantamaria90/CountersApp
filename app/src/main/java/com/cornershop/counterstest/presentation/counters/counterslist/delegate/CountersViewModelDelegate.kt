@@ -10,7 +10,6 @@ interface CountersViewModelDelegate {
     val filteredCountersList: LiveData<List<CounterUI>>
     val isRefreshing: LiveData<Boolean>
     val viewToShow: LiveData<CounterView>
-    val summedCounters: LiveData<Int>
 
     fun onRefresh()
     fun setSelected(counter: CounterUI?)

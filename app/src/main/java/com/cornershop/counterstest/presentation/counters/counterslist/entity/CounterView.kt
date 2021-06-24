@@ -5,5 +5,6 @@ enum class CounterView {
     NO_SEARCH_RESULTS,
     EMPTY_COUNTERS_LIST,
     ERROR,
+    LOADING,
     NONE
 }

@@ -82,7 +82,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:indeterminate="true"
             android:indeterminateTint="@color/orange"
-            visibility="@{vm.viewToShow == CounterView.NONE &amp;&amp; vm.isLoading}"/>
+            visibility="@{vm.viewToShow == CounterView.LOADING}"/>
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"

@@ -3,6 +3,7 @@ package com.cornershop.counterstest.presentation.counters.counterslist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.ViewModel
 import com.cornershop.counterstest.domain.counters.entity.ModifyCounterType
 import com.cornershop.counterstest.presentation.counters.counterslist.delegate.CountersViewModelDelegate
@@ -24,6 +25,7 @@ class CountersViewModel @Inject constructor(
     val isEditing: LiveData<Boolean> get() = _isEditing
     val confirmDelete: LiveData<Event<CounterUI>> get() = _confirmDelete
     val share: LiveData<Event<CounterUI>> get() = _share
+    val summedCounters: LiveData<Int> = map(filteredCountersList) { list -> list.sumBy { it.count } }
     val isLoading: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         addSource(isRefreshing) { value = it }
         addSource(isUpdating) { value = it }

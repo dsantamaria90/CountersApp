@@ -15,10 +15,10 @@ class CountersRemoteDataSource @Inject constructor(
     suspend fun getCountersList(): Result<List<Counter>> =
         getResult { service.getCountersList() }
 
-    suspend fun addCounter(addCounter: AddCounter) =
+    suspend fun addCounter(addCounter: AddCounter): Result<List<Counter>> =
         getResult { service.addCounter(addCounter) }
 
-    suspend fun deleteCounter(modifyCounter: ModifyCounter) =
+    suspend fun deleteCounter(modifyCounter: ModifyCounter): Result<List<Counter>> =
         getResult { service.deleteCounter(modifyCounter) }
 
     suspend fun incrementCounter(modifyCounter: ModifyCounter): Result<List<Counter>> =

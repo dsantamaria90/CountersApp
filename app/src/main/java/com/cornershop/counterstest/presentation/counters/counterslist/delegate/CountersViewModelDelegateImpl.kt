@@ -1,14 +1,14 @@
 package com.cornershop.counterstest.presentation.counters.counterslist.delegate
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations.map
 import com.cornershop.counterstest.domain.counters.entity.Counter
 import com.cornershop.counterstest.domain.counters.usecase.GetCountersListUseCase
 import com.cornershop.counterstest.domain.counters.usecase.RefreshCountersListUseCase
 import com.cornershop.counterstest.domain.di.MainDispatcher
-import com.cornershop.counterstest.domain.entity.Result
 import com.cornershop.counterstest.domain.entity.getData
+import com.cornershop.counterstest.domain.entity.isError
 import com.cornershop.counterstest.domain.entity.isSuccess
 import com.cornershop.counterstest.presentation.counters.counterslist.CounterRetryClickListener
 import com.cornershop.counterstest.presentation.counters.counterslist.entity.CounterUI
@@ -28,16 +28,39 @@ class CountersViewModelDelegateImpl @Inject constructor(
 
     override val isRefreshing: LiveData<Boolean> get() = _isRefreshing
     override val filteredCountersList: LiveData<List<CounterUI>> get() = _filteredCountersList
-    override val viewToShow: LiveData<CounterView> get() = _viewToShow
 
     private val _isRefreshing = MutableLiveData<Boolean>()
     private val _filteredCountersList = MutableLiveData<List<CounterUI>>(emptyList())
-    private val _viewToShow = MutableLiveData(CounterView.NONE)
+    private val _refreshError = MutableLiveData<Boolean>()
     private var countersList = emptyList<Counter>()
     private var lastSearchedQuery = ""
 
-    override val summedCounters: LiveData<Int> =
-        map(filteredCountersList) { list -> list.sumBy { it.count } }
+    override val viewToShow: LiveData<CounterView> = MediatorLiveData<CounterView>().apply {
+        addSource(_filteredCountersList) { value = getViewToShow() }
+        addSource(_isRefreshing) { value = getViewToShow() }
+        addSource(_refreshError) { value = getViewToShow() }
+    }
+
+    private fun getViewToShow(): CounterView {
+        val isLoading = _isRefreshing.value == true
+        val isEmpty = _filteredCountersList.value?.isNullOrEmpty() == true
+        val isError = _refreshError.value == true
+        val isQueryEmpty = lastSearchedQuery.isEmpty()
+
+        return if (isEmpty && !isQueryEmpty && !isLoading) {
+            CounterView.NO_SEARCH_RESULTS
+        } else if (isEmpty && !isLoading && !isError) {
+            CounterView.EMPTY_COUNTERS_LIST
+        } else if (!isEmpty) {
+            CounterView.COUNTERS_LIST
+        } else if (isLoading) {
+            CounterView.LOADING
+        } else if (isEmpty && isError) {
+            CounterView.ERROR
+        } else {
+            CounterView.NONE
+        }
+    }
 
     init {
         loadCountersList()
@@ -63,33 +86,16 @@ class CountersViewModelDelegateImpl @Inject constructor(
                 CounterUI(id, title, count)
             }
         }
-        setViewToShow()
-    }
-
-    private fun setViewToShow() {
-        val isLoading = _isRefreshing.value == true
-        val isEmpty = filteredCountersList.value?.isNullOrEmpty() == true
-        _viewToShow.value = if (isEmpty && lastSearchedQuery.isNotEmpty() && !isLoading) {
-            CounterView.NO_SEARCH_RESULTS
-        } else if (isEmpty && !isLoading) {
-            CounterView.EMPTY_COUNTERS_LIST
-        } else if (!isEmpty) {
-            CounterView.COUNTERS_LIST
-        } else {
-            CounterView.NONE
-        }
     }
 
     override fun onRefresh() {
         launch {
             _isRefreshing.value = true
+            _refreshError.value = false
             refreshCountersListUseCase(null).also { result ->
                 _isRefreshing.value = false
-                when (result) {
-                    is Result.Success -> setViewToShow()
-                    is Result.Error -> if (filteredCountersList.value?.isNullOrEmpty() == true) {
-                        _viewToShow.value = CounterView.ERROR
-                    }
+                if (result.isError()) {
+                    _refreshError.value = true
                 }
             }
         }
@@ -106,7 +112,6 @@ class CountersViewModelDelegateImpl @Inject constructor(
 
     override fun onRetryLoadCountersClicked() = object : CounterRetryClickListener {
         override fun onRetryClicked() {
-            _viewToShow.value = CounterView.NONE
             onRefresh()
         }
     }
