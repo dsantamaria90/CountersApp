@@ -9,7 +9,7 @@
             type="com.cornershop.counterstest.presentation.counters.counterslist.entity.CounterUI"/>
         <variable
             name="listener"
-            type="com.cornershop.counterstest.presentation.counters.counterslist.CounterItemClickListener"/>
+            type="com.cornershop.counterstest.presentation.counters.counterslist.view.CounterItemClickListener"/>
         <variable
             name="isLoading"
             type="Boolean"/>

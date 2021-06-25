@@ -1,4 +1,4 @@
-package com.cornershop.counterstest.presentation.counters.counterslist.delegate
+package com.cornershop.counterstest.presentation.counters.counterslist.viewmodel
 
 import androidx.lifecycle.Observer
 import com.cornershop.counterstest.domain.counters.entity.Counter

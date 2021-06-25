@@ -30,7 +30,7 @@ class ModifyCounterUseCaseTest : MockKTest() {
     @Test
     fun onIncrementSuccess_returnSuccess() = runBlockingTest {
         // Arrange
-        val args = newModifyCounterUseCaseArgs(ModifyCounterType.INCREMENT)
+        val args = newModifyCounterUseCaseArgs(type = ModifyCounterType.INCREMENT)
         val expected = Result.Success(Unit)
         coEvery { repository.incrementCounter(args.id) } returns expected
 
@@ -44,7 +44,7 @@ class ModifyCounterUseCaseTest : MockKTest() {
     @Test
     fun onDecrementSuccess_returnSuccess() = runBlockingTest {
         // Arrange
-        val args = newModifyCounterUseCaseArgs(ModifyCounterType.DECREMENT)
+        val args = newModifyCounterUseCaseArgs(type = ModifyCounterType.DECREMENT)
         val expected = Result.Success(Unit)
         coEvery { repository.decrementCounter(args.id) } returns expected
 

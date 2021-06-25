@@ -7,7 +7,7 @@
     <data>
         <variable
             name="vm"
-            type="com.cornershop.counterstest.presentation.counters.counterslist.CountersViewModel"/>
+            type="com.cornershop.counterstest.presentation.counters.counterslist.viewmodel.CountersViewModel"/>
         <import type="com.cornershop.counterstest.presentation.counters.counterslist.entity.CounterView"/>
     </data>
 

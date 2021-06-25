@@ -1,4 +1,4 @@
-package com.cornershop.counterstest.presentation.counters.counterslist.delegate
+package com.cornershop.counterstest.presentation.counters.counterslist.viewmodel
 
 import androidx.lifecycle.LiveData
 import com.cornershop.counterstest.domain.counters.entity.ModifyCounterType

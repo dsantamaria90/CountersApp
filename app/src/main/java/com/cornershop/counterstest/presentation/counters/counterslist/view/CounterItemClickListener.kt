@@ -1,4 +1,4 @@
-package com.cornershop.counterstest.presentation.counters.counterslist
+package com.cornershop.counterstest.presentation.counters.counterslist.view
 
 import com.cornershop.counterstest.presentation.counters.counterslist.entity.CounterUI
 

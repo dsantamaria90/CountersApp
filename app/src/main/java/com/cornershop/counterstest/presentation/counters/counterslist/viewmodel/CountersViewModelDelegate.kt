@@ -1,9 +1,9 @@
-package com.cornershop.counterstest.presentation.counters.counterslist.delegate
+package com.cornershop.counterstest.presentation.counters.counterslist.viewmodel
 
 import androidx.lifecycle.LiveData
-import com.cornershop.counterstest.presentation.counters.counterslist.CounterRetryClickListener
 import com.cornershop.counterstest.presentation.counters.counterslist.entity.CounterUI
 import com.cornershop.counterstest.presentation.counters.counterslist.entity.CounterView
+import com.cornershop.counterstest.presentation.counters.counterslist.view.CounterRetryClickListener
 
 interface CountersViewModelDelegate {
 

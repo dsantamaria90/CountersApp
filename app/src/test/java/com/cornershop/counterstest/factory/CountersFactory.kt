@@ -7,27 +7,28 @@ import com.cornershop.counterstest.domain.counters.entity.ModifyCounterType
 import com.cornershop.counterstest.domain.counters.entity.ModifyCounterUseCaseArgs
 import com.cornershop.counterstest.presentation.counters.counterslist.entity.CounterUI
 import java.util.*
-import kotlin.random.Random
 
 object CountersFactory {
     
     private fun randomString() = UUID.randomUUID().toString()
-    private fun randomInt() = Random.nextInt(100)
+    private fun randomInt() = (0..100).random()
 
-    fun newCounter() = Counter(
-        id = randomString(),
-        title = randomString(),
-        count = randomInt()
-    )
+    private fun newCounter() = Counter(randomString(), randomString(), randomInt())
 
-    fun newCountersList() = listOf(newCounter(), newCounter())
+    fun newCountersList() = listOf(newCounter(), newCounter(), newCounter())
 
     fun newAddCounter(title: String = randomString()) = AddCounter(title)
 
     fun newModifyCounter(id: String = randomString()) = ModifyCounter(id)
 
-    fun newModifyCounterUseCaseArgs(type: ModifyCounterType) =
-        ModifyCounterUseCaseArgs(randomString(), type)
+    fun newModifyCounterUseCaseArgs(id: String = randomString(), type: ModifyCounterType) =
+        ModifyCounterUseCaseArgs(id, type)
 
-    fun newCounterUI(id: String, title: String, count: Int) = CounterUI(id, title, count)
+    fun newCounterUI(
+        id: String = randomString(),
+        title: String = randomString(),
+        count: Int  = randomInt()
+    ) = CounterUI(id, title, count)
+
+    fun newCountersUiList() = listOf(newCounterUI(), newCounterUI(), newCounterUI())
 }

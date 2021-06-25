@@ -4,11 +4,8 @@ import androidx.lifecycle.Observer
 import com.cornershop.counterstest.domain.counters.usecase.AddCounterUseCase
 import com.cornershop.counterstest.domain.entity.Result
 import com.cornershop.counterstest.testutil.ViewModelTest
-import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.coVerifyOrder
+import io.mockk.*
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -85,7 +82,7 @@ class AddCounterViewModelTest : ViewModelTest() {
         viewModel.onSaveClicked()
 
         // Assert
-        coVerify(exactly = 0) { useCase(any()) }
+        coVerify { useCase wasNot Called }
     }
 
     @Test

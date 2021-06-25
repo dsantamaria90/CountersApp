@@ -1,4 +1,4 @@
-package com.cornershop.counterstest.presentation.counters.counterslist.delegate
+package com.cornershop.counterstest.presentation.counters.counterslist.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -10,9 +10,9 @@ import com.cornershop.counterstest.domain.di.MainDispatcher
 import com.cornershop.counterstest.domain.entity.getData
 import com.cornershop.counterstest.domain.entity.isError
 import com.cornershop.counterstest.domain.entity.isSuccess
-import com.cornershop.counterstest.presentation.counters.counterslist.CounterRetryClickListener
 import com.cornershop.counterstest.presentation.counters.counterslist.entity.CounterUI
 import com.cornershop.counterstest.presentation.counters.counterslist.entity.CounterView
+import com.cornershop.counterstest.presentation.counters.counterslist.view.CounterRetryClickListener
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect

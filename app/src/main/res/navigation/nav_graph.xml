@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/counters_list_fragment"
-        android:name="com.cornershop.counterstest.presentation.counters.counterslist.CountersFragment"
+        android:name="com.cornershop.counterstest.presentation.counters.counterslist.view.CountersFragment"
         tools:layout="@layout/fragment_counters"/>
 
     <action

@@ -1,9 +1,9 @@
 package com.cornershop.counterstest.presentation.counters.counterslist.di
 
-import com.cornershop.counterstest.presentation.counters.counterslist.delegate.CountersViewModelDelegate
-import com.cornershop.counterstest.presentation.counters.counterslist.delegate.CountersViewModelDelegateImpl
-import com.cornershop.counterstest.presentation.counters.counterslist.delegate.UpdateCountersViewModelDelegate
-import com.cornershop.counterstest.presentation.counters.counterslist.delegate.UpdateCountersViewModelDelegateImpl
+import com.cornershop.counterstest.presentation.counters.counterslist.viewmodel.CountersViewModelDelegate
+import com.cornershop.counterstest.presentation.counters.counterslist.viewmodel.CountersViewModelDelegateImpl
+import com.cornershop.counterstest.presentation.counters.counterslist.viewmodel.UpdateCountersViewModelDelegate
+import com.cornershop.counterstest.presentation.counters.counterslist.viewmodel.UpdateCountersViewModelDelegateImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

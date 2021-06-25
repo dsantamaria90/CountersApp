@@ -1,4 +1,4 @@
-package com.cornershop.counterstest.presentation.counters.counterslist
+package com.cornershop.counterstest.presentation.counters.counterslist.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.cornershop.counterstest.R
 import com.cornershop.counterstest.databinding.FragmentCountersBinding
 import com.cornershop.counterstest.presentation.base.BaseFragment
+import com.cornershop.counterstest.presentation.counters.counterslist.viewmodel.CountersViewModel
 import com.cornershop.counterstest.presentation.extension.appCompatActivity
 import com.cornershop.counterstest.presentation.extension.showAlertDialog
 import com.cornershop.counterstest.presentation.util.actionmode.ActionModeDelegate

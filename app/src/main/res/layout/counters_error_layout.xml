@@ -4,7 +4,7 @@
     <data>
         <variable
             name="listener"
-            type="com.cornershop.counterstest.presentation.counters.counterslist.CounterRetryClickListener"/>
+            type="com.cornershop.counterstest.presentation.counters.counterslist.view.CounterRetryClickListener"/>
     </data>
 
     <LinearLayout

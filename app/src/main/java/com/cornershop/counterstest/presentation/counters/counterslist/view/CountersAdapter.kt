@@ -1,4 +1,4 @@
-package com.cornershop.counterstest.presentation.counters.counterslist
+package com.cornershop.counterstest.presentation.counters.counterslist.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
