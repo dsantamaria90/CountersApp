@@ -9,6 +9,7 @@ import com.cornershop.counterstest.factory.CountersFactory.newModifyCounter
 import com.cornershop.counterstest.testutil.MockKTest
 import io.mockk.coEvery
 import io.mockk.coVerifyOrder
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -41,7 +42,7 @@ class CountersRepositoryImplTest : MockKTest() {
     fun onGetCountersList_returnSuccessList() = runBlockingTest {
         // Arrange
         val countersListFlow = flowOf(countersList)
-        coEvery { local.getCountersList() } returns countersListFlow
+        every { local.getCountersList() } returns countersListFlow
 
         // Act
         val result = repository.getCountersList()

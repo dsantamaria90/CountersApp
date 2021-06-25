@@ -5,7 +5,7 @@ import com.cornershop.counterstest.domain.entity.Result
 import com.cornershop.counterstest.factory.CountersFactory.newCountersList
 import com.cornershop.counterstest.testutil.MockKTest
 import com.cornershop.counterstest.testutil.TestDispatcher.newTestDispatcher
-import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
@@ -32,7 +32,7 @@ class GetCountersListUseCaseTest : MockKTest() {
     fun onExecuteSuccess_returnSuccess() = runBlockingTest {
         // Arrange
         val expected = flowOf(Result.Success(newCountersList()))
-        coEvery { repository.getCountersList() } returns expected
+        every { repository.getCountersList() } returns expected
 
         // Act
         val result = useCase(null)
@@ -45,7 +45,7 @@ class GetCountersListUseCaseTest : MockKTest() {
     fun onExecuteError_returnError() = runBlockingTest {
         // Arrange
         val expected = flowOf(Result.Error(Exception()))
-        coEvery { repository.getCountersList() } returns expected
+        every { repository.getCountersList() } returns expected
 
         // Act
         val result = useCase(null)

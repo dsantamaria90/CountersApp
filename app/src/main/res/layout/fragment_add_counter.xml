@@ -17,6 +17,7 @@
             android:id="@+id/title_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:placeholderText="@string/counter_name_hint"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText

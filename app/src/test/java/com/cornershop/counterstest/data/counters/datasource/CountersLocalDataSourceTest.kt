@@ -3,8 +3,8 @@ package com.cornershop.counterstest.data.counters.datasource
 import com.cornershop.counterstest.data.counters.dao.CountersDao
 import com.cornershop.counterstest.factory.CountersFactory.newCountersList
 import com.cornershop.counterstest.testutil.MockKTest
-import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
@@ -41,7 +41,7 @@ class CountersLocalDataSourceTest : MockKTest() {
     fun onGetCountersList_fromDao() = runBlockingTest {
         // Arrange
         val expected = flowOf(countersList)
-        coEvery { dao.getCountersList() } returns expected
+        every { dao.getCountersList() } returns expected
 
         // Act
         val result = local.getCountersList()

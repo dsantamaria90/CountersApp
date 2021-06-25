@@ -44,7 +44,7 @@ class CountersViewModelDelegateImplTest : ViewModelTest() {
         emptyList: Boolean = false,
         isRefreshSuccess: Boolean = true
     ): CountersViewModelDelegateImpl {
-        coEvery { getCountersListUseCase(null) } returns flowOf(Result.Success(
+        every { getCountersListUseCase(null) } returns flowOf(Result.Success(
             if (emptyList) {
                 emptyList()
             } else {

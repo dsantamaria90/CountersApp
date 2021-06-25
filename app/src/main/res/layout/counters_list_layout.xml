@@ -34,8 +34,8 @@
             app:layout_constraintLeft_toRightOf="@id/items_count_tv"
             android:layout_marginStart="@dimen/margin_normal_1"
             style="@style/SubTitle"
-            android:text="@{@string/n_items(vm.summedCounters)}"
-            tools:text="17 items"/>
+            android:text="@{@string/n_times(vm.summedCounters)}"
+            tools:text="17 times"/>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
